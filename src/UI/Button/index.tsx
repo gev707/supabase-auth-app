@@ -1,15 +1,16 @@
 import {ButtonType} from "../../types";
+import {className} from "postcss-selector-parser";
 
-const Index = ({text,onClick,variant}:ButtonType) => {
+const Button = ({text,onClick,className}:ButtonType) => {
   return (
     <button
       type="button"
       onClick={onClick}
-      variant={variant}
+      className={className}
     >
       {text}
     </button>
   );
 };
 
-export default Index;
+export default Button;

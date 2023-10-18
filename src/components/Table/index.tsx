@@ -1,17 +1,25 @@
+'use client';
+
 import {Line} from "@/components/Table/Line";
+import {useSearch} from "@/hooks/useSearch";
 
-const data = [
-  {name:'Ben - Short (ROBOT - ADVANCED)' , type:'Sales' , edited: '4 days'},
-  {name:'Ben - Long (ROBOT - ADVANCED)' , type:'Sales' , edited: '4 days'},
-  {name:'Jen - Short (ROBOT - ADVANCED)' , type:'Sales' , edited: '4 days'}
-]
 
-export default function Index() {
-  const newData = data.map(item=>{
+export default function Table() {
+  const {filteredUsers} = useSearch();
+
+  const newData=
+    filteredUsers?.map(item=> {
     return (
-      <Line name={item.name} type={item.type} edited={item.edited} />
+      <Line
+        key={item.id}
+        name={item.name}
+        type={item.type}
+        edited={item.edited}
+        id={item.id}
+      />
     )
   })
+
   return (
     <>
     <div className='w-full mt-5 pl-5 pr-5 h-14 items-center grid border-b-2'>

@@ -1,7 +1,19 @@
-import {InputType} from "@/types";
+import {InputProps} from "@/types";
 
 
-export default function Input({onChange,value,type}:InputType) {
-  // @ts-ignore
-  return <input type="text" onChange={onChange} value={value} />
+export default function Input({
+                                onChange,
+                                value,
+                                type,
+                                className,
+                                placeholder,
+                                id}:InputProps) {
+  return <input
+    type={type}
+    onChange={onChange}
+    value={value}
+    className={className}
+    placeholder={placeholder}
+    id={id}
+  />
 }
