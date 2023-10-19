@@ -1,39 +1,42 @@
-import {createSlice,PayloadAction} from '@reduxjs/toolkit';
-import {fetchAgentsList} from "@/store/thunks/list-thunk";
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {IAgents} from "@/types";
+import {deleteAgentById, fetchAgents} from "@/store/thunks/list-thunk";
 
-const initialState:AgentType = [{
-  name:'',
-  type:'',
-  edited:''
-}]
+interface AgentsState {
+  agents:IAgents[],
+  isLoading :boolean,
+  error:string
+}
 
-export type AgentType = [{
-  id?:string | number,
-  name:string,
-  type:string,
-  edited:string
-}]
+const initialState:AgentsState = {
+  agents: [],
+  isLoading:false,
+  error:''
+}
 
 export const agents = createSlice({
   name: 'agents',
   initialState,
-
-  reducers:{
-   deleteCurrentListItem:(state,action:PayloadAction<number | string>)=> {
-     state.filter(item=> item.id !== action.payload)
-   }
-  },
-  extraReducers: (builder) => {
+  reducers:{},
+  extraReducers(builder) {
+    // @ts-ignore
     builder
-      .addCase(fetchAgentsList.pending, (state, action) => {
+      .addCase(fetchAgents.pending, (state) => {
+        state.isLoading = true
+        state.error=''
+        state.agents = []
       })
-      .addCase(fetchAgentsList.fulfilled, (state, action:PayloadAction<AgentType| any>) => {
-        state.push(action.payload)
+      .addCase(fetchAgents.fulfilled, (state, action:PayloadAction<IAgents[]>) => {
+        state.isLoading = false
+        state.agents = action.payload
       })
-      .addCase(fetchAgentsList.rejected, (state, action) => {
+      .addCase(fetchAgents.rejected, (state,action:PayloadAction<string> ) => {
+        state.isLoading = false
+        state.agents = []
+        state.error = action.payload
       })
-  },
+  }
 })
 
-export const {deleteCurrentListItem} = agents.actions;
+export const {} = agents.actions;
 export default  agents.reducer

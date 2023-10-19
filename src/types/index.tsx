@@ -21,4 +21,12 @@ export interface InputProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export type ChangePages = 'create' | 'contacts' | 'campaign' | 'recording'
+export type ChangePages = 'create' | 'contacts' | 'campaign' | 'recording';
+
+export interface IAgents   {
+  name:string,
+  id?:string,
+  type:string,
+  edited:string
+}
+
