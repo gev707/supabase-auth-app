@@ -1,10 +1,11 @@
-import {ChangeEvent} from "react";
+import {ChangeEvent,KeyboardEvent} from "react";
 
 export type ButtonType = {
   text: string,
   onClick:() => void,
   className?:string
   type: string
+  disabled?:boolean
 }
 
 
@@ -18,10 +19,10 @@ export interface InputProps {
   placeholder?: string
   className?: string
   disabled?: boolean
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onKeyPress?:(e:KeyboardEvent<HTMLInputElement>) => void
 }
 
-export type ChangePages = 'create' | 'contacts' | 'campaign' | 'recording';
 
 export interface IAgents   {
   name:string,

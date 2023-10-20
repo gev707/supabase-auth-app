@@ -28,11 +28,9 @@ export default function Modal() {
   }
 
   const handleSubmit = () => {
-    const formData:IAgent = {
-      ...agent,
-    }
-    if(agent.name && agent.type && agent.edited) {
-      dispatch(addAgent(formData));
+
+    if(agent.name !== '' && agent.type !== '' && agent.edited !== '') {
+      dispatch(addAgent({...agent}));
       dispatch(setToggleModal())
     }
   }
@@ -72,6 +70,7 @@ export default function Modal() {
         text="Add"
         onClick={handleSubmit}
         type='submit'
+        disabled={agent.name === '' || agent.type === '' || agent.edited === ''}
       />
     </form>
 

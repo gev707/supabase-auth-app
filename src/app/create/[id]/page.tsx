@@ -1,11 +1,10 @@
 'use client';
 
-import {useParams, useRouter} from "next/navigation";
-import {IAgents} from "@/types";
 import {ChangeEvent, useEffect, useState} from "react";
+import {useParams, useRouter} from "next/navigation";
 import {useAppDispatch} from "@/store";
-import {editAgent, getSingleAgent} from "@/store/thunks/list-thunk";
 import {useSelectorTyped} from "@/store/hooks";
+import {editAgent, fetchAgents, getSingleAgent} from "@/store/thunks/list-thunk";
 import Input from "@/UI/Input";
 import Button from "@/UI/Button";
 
@@ -16,10 +15,10 @@ interface IAgent {
 }
 
 export default function CurrentAgent(){
-  const router = useRouter();
-  const {singleAgent} = useSelectorTyped(state => state.single)
-  const dispatch = useAppDispatch();
   const {id} = useParams()
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const {singleAgent} = useSelectorTyped(state => state.single)
   const [agent,setAgent] = useState<IAgent>({
     name:'',
     edited:'',
@@ -28,28 +27,24 @@ export default function CurrentAgent(){
 
 
   useEffect( ()=> {
+    async function handleSingleAgentData():Promise<void> {
+      // @ts-ignore
+      await dispatch(getSingleAgent(id));
+      setAgent(prevState=> ({...prevState,...singleAgent}))
+    }
     handleSingleAgentData()
-  },[])
+  },[id])
 
 
-  async function handleSingleAgentData() {
-    // @ts-ignore
-    await dispatch(getSingleAgent(id));
-    setAgent(prevState=> ({...prevState,...singleAgent}))
-  }
 
   const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
     setAgent({...agent,[e.target.name]: e.target.value})
   }
 
-  const handleSubmit = () => {
-    const formData = {
-      ...agent,
-    }
-    if (agent?.name?.length && agent.type?.length && agent?.edited?.length) {
-      dispatch(editAgent(formData))
-    }
-    router.back()
+  const handleSubmit = async () => {
+      await dispatch(editAgent({...agent}))
+      await dispatch(fetchAgents())
+      router.back()
   }
     return (
       <>
@@ -81,9 +76,10 @@ export default function CurrentAgent(){
           <span className='p-2 block'></span>
 
           <Button
-            text="Add"
+            text="Edit"
             onClick={handleSubmit}
             type='submit'
+            disabled={agent.name === '' || agent.type === '' || agent.edited === ''}
           />
         </div>
       </>

@@ -4,14 +4,17 @@ import {deleteAgentById, fetchAgents} from "@/store/thunks/list-thunk";
 
 interface AgentsState {
   agents:IAgents[],
+  filteredAgents:IAgents[],
   isLoading :boolean,
   error:string
+
 }
 
 const initialState:AgentsState = {
   agents: [],
+  filteredAgents: [],
   isLoading:false,
-  error:''
+  error:'',
 }
 
 export const agents = createSlice({
@@ -20,6 +23,9 @@ export const agents = createSlice({
   reducers:{
     deleteAgent:(state,action:PayloadAction<string>)=> {
       state.agents = state.agents.filter(item=> item.id !== action.payload)
+    },
+    filterAgents: (state,action)=> {
+      state.filteredAgents = state.agents.filter(item=> item.name.includes(action.payload))
     }
   },
   extraReducers(builder) {
@@ -29,18 +35,21 @@ export const agents = createSlice({
         state.isLoading = true
         state.error=''
         state.agents = []
+        state.filteredAgents = []
       })
       .addCase(fetchAgents.fulfilled, (state, action:PayloadAction<IAgents[]>) => {
         state.isLoading = false
         state.agents = action.payload
+        state.filteredAgents = action.payload
       })
       .addCase(fetchAgents.rejected, (state,action:PayloadAction<string> ) => {
         state.isLoading = false
         state.agents = []
+        state.filteredAgents = []
         state.error = action.payload
       })
   }
 })
 
-export const {deleteAgent} = agents.actions;
+export const {deleteAgent,filterAgents} = agents.actions;
 export default  agents.reducer

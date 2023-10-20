@@ -1,5 +1,5 @@
 import { configureStore,combineReducers } from '@reduxjs/toolkit'
-import agents from "@/store/slices/list-slice";
+import agents from "@/store/slices/agent-slice";
 import modal from '@/store/slices/modal-slice'
 import single from '@/store/slices/single-agent'
 import {useDispatch} from "react-redux";

@@ -1,18 +1,19 @@
 'use client'
 
-import {ChangePages} from "@/types";
 import Link from "next/link";
+import {useRouter} from "next/navigation";
 
-export default function Index() {
-
-  const changePage = (page:ChangePages) => {
-
+export default function Header() {
+  const router = useRouter()
+  const routeHomePage = () => {
+    router.push('./')
   }
   return (
-    <header className='flex justify-between items-center pl-5 pr-5 border-b-2 bg-emerald-500'>
-      <h1 className='p-3 text-fuchsia-800 text-3xl'>Air</h1>
+    <header className='flex justify-between items-center pl-5 pr-5 border-b-2 bg-emerald-500 h-18'>
+      <h1 className='p-3 text-fuchsia-800 text-3xl'
+      onClick={routeHomePage}>Air</h1>
       <div className="flex justify-between items-center">
-          <ul className='flex items-center text-amber-50'>
+          <ul className='flex items-center text-amber-50 text-sm font-bold'>
             <li className='mr-5'>
               <Link href='/create'>
                 Create
