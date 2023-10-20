@@ -15,15 +15,15 @@ export default function Form () {
   }
 
   return(
-  <form>
+  <form className='w-full flex justify-end p-3 border' onSubmit={(e)=>{e.preventDefault()}}>
     <label
       htmlFor='search'
-      className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
+      className="mb-2 text-sm font-medium text-gray-900 sr-only">
       Search
     </label>
-    <div className="relative">
-      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+    <div className=" p-2 flex justify-end bg-emerald-400 rounded-lg">
+      <div className="flex items-center justify pl-2 pr-2 pointer-events-none">
+        <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
              fill="none" viewBox="0 0 20 20">
           <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -31,7 +31,7 @@ export default function Form () {
       </div>
       <Input type="search"
              id='search'
-             placeholder="Search Mockups, Logos..."
+             placeholder="Search"
              onChange={handleChange}
              value={searchValue}
       />

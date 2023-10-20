@@ -12,7 +12,7 @@ export default function Input({
     type={type}
     onChange={onChange}
     value={value}
-    className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    className="block text-black w-full rounded-lg pl-2 p-2 w-full"
     placeholder={placeholder}
     id={id}
     name={name}

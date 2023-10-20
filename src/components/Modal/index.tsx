@@ -2,9 +2,9 @@ import Input from "@/UI/Input";
 import Button from "@/UI/Button";
 import {useAppDispatch} from "@/store";
 import {setToggleModal} from "@/store/slices/modal-slice";
-import {ChangeEvent, useEffect, useState} from "react";
-import {addAgent, editAgent} from "@/store/thunks/list-thunk";
-import {useSelectorTyped} from "@/store/hooks";
+import {ChangeEvent, useState} from "react";
+import {addAgent} from "@/store/thunks/list-thunk";
+import {MdDisabledByDefault} from "react-icons/md";
 
 interface IAgent {
   name:string,
@@ -13,8 +13,6 @@ interface IAgent {
 }
 
 export default function Modal() {
-  const {isEdited,singleAgent} = useSelectorTyped(state=>state.modal)
-  const {agents} = useSelectorTyped(state=>state.agents)
   const [agent,setAgent] = useState<IAgent>({
     name:'',
     type:'',
@@ -28,25 +26,24 @@ export default function Modal() {
   const handleClose = () => {
     dispatch(setToggleModal())
   }
-  useEffect(()=>{
-    setAgent(prevState => ({...prevState,...singleAgent}))
-  },[isEdited]);
 
   const handleSubmit = () => {
     const formData:IAgent = {
       ...agent,
     }
-    if(agent.name.length && agent.type.length && agent.edited.length) {
-      isEdited
-        ? dispatch(editAgent(formData))
-        :dispatch(addAgent(formData));
+    if(agent.name && agent.type && agent.edited) {
+      dispatch(addAgent(formData));
       dispatch(setToggleModal())
     }
   }
 
   return <>
-    <div className="mr-auto ml-auto bg-blue-50 w-64 h-64 p-3 flex-col text-center">
-      <p onClick={handleClose}>X</p>
+    <form
+      onSubmit={(e)=>{e.preventDefault()}}
+      className=" flex-col gap-1.5 w-72 mr-auto ml-auto bg-blue-50 p-3 text-center mt-2"
+    >
+      <span className='flex justify-end' onClick={handleClose}>{MdDisabledByDefault()}</span>
+      <span className='p-2 block'></span>
       <Input
         type='text'
         value={agent.name}
@@ -54,6 +51,7 @@ export default function Modal() {
         onChange={(e)=>handleChange(e)}
         placeholder='name'
       />
+      <span className='p-2 block'></span>
       <Input
         type='text'
         value={agent.type}
@@ -61,6 +59,7 @@ export default function Modal() {
         onChange={(e)=>handleChange(e)}
         placeholder='type'
       />
+      <span className='p-2 block'></span>
       <Input
         type='text'
         value={agent.edited}
@@ -68,12 +67,13 @@ export default function Modal() {
         onChange={(e)=>handleChange(e)}
         placeholder='edited'
       />
+      <span className='p-2 block'></span>
       <Button
         text="Add"
         onClick={handleSubmit}
         type='submit'
       />
-    </div>
+    </form>
 
   </>
 }

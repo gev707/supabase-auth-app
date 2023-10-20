@@ -1,15 +1,11 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {fetchAgents, getSingleAgent} from "@/store/thunks/list-thunk";
-import {IAgents} from "@/types";
+import {createSlice} from "@reduxjs/toolkit";
 
 interface ModalState {
-  singleAgent: {}
   isModalOpen:boolean,
   isEdited:boolean,
 }
 
 const initialState:ModalState  = {
-  singleAgent:{},
   isModalOpen:false,
   isEdited:false
 }
@@ -25,15 +21,12 @@ const modal = createSlice({
         state.isEdited = !state.isEdited
       }
   },
-  extraReducers(builder) {
-    builder
-      .addCase(getSingleAgent.fulfilled, (state, action:PayloadAction<{}>) => {
-        state.singleAgent = action.payload
-      })
-
-  }
 })
 
 
-export const  {setToggleModal,setEditedModalForm} = modal.actions
+export const  {
+  setToggleModal,
+  setEditedModalForm
+} = modal.actions
+
 export default modal.reducer

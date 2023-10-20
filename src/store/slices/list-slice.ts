@@ -17,7 +17,11 @@ const initialState:AgentsState = {
 export const agents = createSlice({
   name: 'agents',
   initialState,
-  reducers:{},
+  reducers:{
+    deleteAgent:(state,action:PayloadAction<string>)=> {
+      state.agents = state.agents.filter(item=> item.id !== action.payload)
+    }
+  },
   extraReducers(builder) {
     // @ts-ignore
     builder
@@ -38,5 +42,5 @@ export const agents = createSlice({
   }
 })
 
-export const {} = agents.actions;
+export const {deleteAgent} = agents.actions;
 export default  agents.reducer

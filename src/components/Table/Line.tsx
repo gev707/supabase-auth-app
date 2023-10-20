@@ -1,25 +1,19 @@
 'use client'
 
-import {MdDeleteOutline,MdFileCopy} from 'react-icons/md'
+import {MdDeleteForever, MdDeleteOutline, MdEdit, MdFileCopy} from 'react-icons/md'
 import {useAppDispatch} from "@/store";
 import {IAgents} from "@/types";
-import {deleteAgentById, getSingleAgent} from "@/store/thunks/list-thunk";
+import {deleteAgentById, fetchAgents} from "@/store/thunks/list-thunk";
 import {setEditedModalForm, setToggleModal} from "@/store/slices/modal-slice";
+import {useRouter} from "next/navigation";
+import {deleteAgent} from "@/store/slices/list-slice";
+import Link from "next/link";
 
-export const Line = ({name, type, edited,id}:IAgents) => {
-  const dispatch = useAppDispatch();
+interface LineProps extends IAgents {
+ handleDelete?:()=>void
+}
 
-  const handleDelete = () => {
-    // @ts-ignore
-    dispatch(deleteAgentById(id))
-  }
-
-  const handleOpenEditModal = () => {
-    // @ts-ignore
-    dispatch(getSingleAgent(id))
-    dispatch(setEditedModalForm())
-    dispatch(setToggleModal())
-  }
+export const Line = ({name, type, edited,id,handleDelete }:LineProps) => {
 
   return (
     <>
@@ -42,12 +36,11 @@ export const Line = ({name, type, edited,id}:IAgents) => {
               <div className='flex'>
                 <span
                   className="cursor-pointer mr-1"
-                  onClick={handleOpenEditModal}
-                >{MdFileCopy()}</span>
+                ><Link href={`./create/${id}`}>{MdEdit()}</Link></span>
                 <span aria-hidden='true'
                       onClick={handleDelete}
-                      className="cursor-pointer"
-                >{MdDeleteOutline()}</span>
+                      className="cursor-pointer text-red-700"
+                >{MdDeleteForever()}</span>
               </div>
             </div>
           </div>

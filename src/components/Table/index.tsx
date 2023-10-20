@@ -4,7 +4,8 @@ import {Line} from "@/components/Table/Line";
 import {useEffect} from "react";
 import {useSelectorTyped} from "@/store/hooks";
 import {useAppDispatch} from "@/store";
-import {fetchAgents} from "@/store/thunks/list-thunk";
+import {deleteAgentById, fetchAgents} from "@/store/thunks/list-thunk";
+import {deleteAgent} from "@/store/slices/list-slice";
 
 
 export default function Table() {
@@ -15,17 +16,24 @@ export default function Table() {
      dispatch(fetchAgents())
   },[])
 
+  // @ts-ignore
+  const handleDelete = (id) => {
+    dispatch(deleteAgentById(id))
+    dispatch(deleteAgent(id))
+  }
+
   const newData=
     agents?.filter((item) => {
       return item.name.toLowerCase().includes('')
     })?.map(item=> {
-    return (
+      return (
       <Line
         key={item.id}
         name={item.name}
         type={item.type}
         edited={item.edited}
         id={item.id}
+        handleDelete={()=>handleDelete(item.id)}
       />
     )
   })
@@ -33,7 +41,7 @@ export default function Table() {
   return (
     <>
       {isLoading
-        ? <h1 className='flex justify-center items-center text-center text-5xl'>Loading</h1>
+        ? <h1 className='flex justify-center items-center text-center text-5xl text-emerald-500'>Loading</h1>
         : <>
             <div className='w-full mt-5 pl-5 pr-5 h-14 items-center grid border-b-2'>
               <div className="flex justify-between items-center">
