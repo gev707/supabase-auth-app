@@ -7,16 +7,17 @@ import Form from "@/components/Form";
 
 export default function Create() {
 
-  const {isModalOpen} = useSelectorTyped(state=> state.modal);
+  const {isModalOpen,isConfirmModalOpen} = useSelectorTyped(state=> state.modal);
 
   return (
     <div className='flex justify-center items-center w-full h-full'>
-      {isModalOpen
-        ? <Modal/>
-        : <div className='w-5/6'>
-            <Form />
-            <Table />
-          </div>
+      {
+        isModalOpen
+          ? <Modal/>
+          : <div className='w-5/6'>
+              <Form />
+              <Table />
+            </div>
       }
 
     </div>

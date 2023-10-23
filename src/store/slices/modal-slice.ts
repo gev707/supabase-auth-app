@@ -2,10 +2,12 @@ import {createSlice} from "@reduxjs/toolkit";
 
 interface ModalState {
   isModalOpen:boolean,
+  isConfirmModalOpen:boolean
 }
 
 const initialState:ModalState  = {
   isModalOpen:false,
+  isConfirmModalOpen:false
 }
 
 const modal = createSlice({
@@ -15,12 +17,16 @@ const modal = createSlice({
       setToggleModal : (state) => {
         state.isModalOpen= !state.isModalOpen
       },
+    setToggleConfirmModal: (state)=>{
+        state.isConfirmModalOpen = !state.isConfirmModalOpen
+    }
   },
 })
 
 
 export const  {
   setToggleModal,
+  setToggleConfirmModal
 } = modal.actions
 
 export default modal.reducer

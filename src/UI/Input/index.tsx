@@ -1,4 +1,5 @@
 import {InputProps} from "@/types";
+import {className} from "postcss-selector-parser";
 
 
 export default function Input({
@@ -7,12 +8,13 @@ export default function Input({
                                 type,
                                 placeholder,
                                 name,
-                                id}:InputProps) {
+                                id,
+                                className}:InputProps) {
   return <input
     type={type}
     onChange={onChange}
     value={value}
-    className="block text-black rounded-lg pl-2 p-2"
+    className={className}
     placeholder={placeholder}
     id={id}
     name={name}

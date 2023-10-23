@@ -11,7 +11,7 @@ export type ButtonType = {
 
 
 export interface InputProps {
-  type: 'text' | 'search'
+  type: 'text' | 'search' | 'password'
   id?:string
   label?: string
   value: string | number
@@ -21,6 +21,7 @@ export interface InputProps {
   disabled?: boolean
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyPress?:(e:KeyboardEvent<HTMLInputElement>) => void
+  autoComplate? : string
 }
 
 

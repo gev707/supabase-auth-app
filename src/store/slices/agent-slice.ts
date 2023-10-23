@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {IAgents} from "@/types";
-import {deleteAgentById, fetchAgents} from "@/store/thunks/list-thunk";
+import {fetchAgents} from "@/store/thunks/list-thunk";
 
 interface AgentsState {
   agents:IAgents[],
@@ -23,6 +23,7 @@ export const agents = createSlice({
   reducers:{
     deleteAgent:(state,action:PayloadAction<string>)=> {
       state.agents = state.agents.filter(item=> item.id !== action.payload)
+      state.filteredAgents = state.agents.filter(item => item.id !== action.payload)
     },
     filterAgents: (state,action)=> {
       state.filteredAgents = state.agents.filter(item=> item.name.includes(action.payload))
@@ -33,7 +34,7 @@ export const agents = createSlice({
     builder
       .addCase(fetchAgents.pending, (state) => {
         state.isLoading = true
-        state.error=''
+        state.error = ''
         state.agents = []
         state.filteredAgents = []
       })
@@ -41,6 +42,7 @@ export const agents = createSlice({
         state.isLoading = false
         state.agents = action.payload
         state.filteredAgents = action.payload
+        state.error = ''
       })
       .addCase(fetchAgents.rejected, (state,action:PayloadAction<string> ) => {
         state.isLoading = false

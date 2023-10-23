@@ -35,12 +35,13 @@ export default function Modal() {
     }
   }
 
-  return <>
+  return <div className='grid'>
+    <h1 className='text-3xl text-center mt-5'>Add Agent</h1>
     <form
       onSubmit={(e)=>{e.preventDefault()}}
-      className=" flex-col gap-1.5 w-72 mr-auto ml-auto bg-blue-50 p-3 text-center mt-2"
+      className=" grid w-72 my-auto shadow-xl p-3 text-center mt-5 rounded"
     >
-      <span className='flex justify-end' onClick={handleClose}>{MdDisabledByDefault()}</span>
+      <span className='flex justify-end text-red-700' onClick={handleClose}>{MdDisabledByDefault()}</span>
       <span className='p-2 block'></span>
       <Input
         type='text'
@@ -48,31 +49,33 @@ export default function Modal() {
         name='name'
         onChange={(e)=>handleChange(e)}
         placeholder='name'
+        className='p-1.5 my-2 rounded bg-gray-100 shadow'
       />
-      <span className='p-2 block'></span>
       <Input
         type='text'
         value={agent.type}
         name='type'
         onChange={(e)=>handleChange(e)}
         placeholder='type'
+        className='p-1.5 my-2 rounded bg-gray-100 shadow'
       />
-      <span className='p-2 block'></span>
       <Input
         type='text'
         value={agent.edited}
         name='edited'
         onChange={(e)=>handleChange(e)}
         placeholder='edited'
+        className='p-1.5 my-2 rounded bg-gray-100 shadow'
+
       />
-      <span className='p-2 block'></span>
       <Button
         text="Add"
         onClick={handleSubmit}
         type='submit'
         disabled={agent.name === '' || agent.type === '' || agent.edited === ''}
+        className='bg-blue-500 my-2 p-1.5 w-1/2 mx-auto rounded hover:bg-blue-700 text-white'
       />
     </form>
 
-  </>
+  </div>
 }
