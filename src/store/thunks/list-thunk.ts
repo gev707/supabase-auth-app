@@ -17,7 +17,7 @@ export const fetchAgents = createAsyncThunk(
 )
 export const deleteAgentById = createAsyncThunk(
   'agents/deleteAgentById',
-  async (id:string)=> {
+  async (id)=> {
     const response = await supabase
       .from('agents')
       .delete()
@@ -35,7 +35,7 @@ export const addAgent = createAsyncThunk(
 )
 
 export const getSingleAgent = createAsyncThunk (
-  'agents/getSinglAgent',
+  'agents/getSingleAgent',
   async (id) => {
       const {data} = await supabase
         .from('agents')
@@ -47,7 +47,7 @@ export const getSingleAgent = createAsyncThunk (
 )
 export const editAgent = createAsyncThunk (
   'agents/editAgent',
-  async ({name, type, edited,id}:IAgents)=> {
+  async ({name, type, edited, id}:IAgents) => {
     const {data,error} = await supabase
       .from('agents')
       .update({name, type, edited})

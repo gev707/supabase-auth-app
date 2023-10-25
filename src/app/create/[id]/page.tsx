@@ -12,7 +12,7 @@ import {MdDisabledByDefault} from "react-icons/md";
 interface IAgent {
   name:string,
   edited:string,
-  type:string,
+  type:string
 }
 
 export default function CurrentAgent(){
@@ -46,7 +46,7 @@ export default function CurrentAgent(){
   }
 
   useEffect( ()=> {
-    handleSingleAgentData()
+    handleSingleAgentData();
   },[id])
 
     return (
