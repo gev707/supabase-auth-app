@@ -5,11 +5,14 @@ import {IAgents} from "@/types";
 export const fetchAgents = createAsyncThunk(
   'agents/getAgentsList',
   async () => {
-    const response = await supabase
-      .from('agents')
-      .select('*');
-
-      return response.data
+    try {
+      const {data} = await supabase
+        .from('agents')
+        .select('*');
+        return data
+    }catch (error) {
+      return error
+    }
   }
 )
 export const deleteAgentById = createAsyncThunk(

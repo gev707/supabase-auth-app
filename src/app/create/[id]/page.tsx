@@ -12,7 +12,7 @@ import {MdDisabledByDefault} from "react-icons/md";
 interface IAgent {
   name:string,
   edited:string,
-  type:string
+  type:string,
 }
 
 export default function CurrentAgent(){
@@ -41,14 +41,13 @@ export default function CurrentAgent(){
   }
 
   async function handleSingleAgentData():Promise<void> {
-    // @ts-ignore
     await dispatch(getSingleAgent(id));
     setAgent(prevState=> ({...prevState,...singleAgent}))
   }
 
   useEffect( ()=> {
     handleSingleAgentData()
-  },[id,router])
+  },[id])
 
     return (
       <>
@@ -86,7 +85,7 @@ export default function CurrentAgent(){
             onClick={handleSubmit}
             type='submit'
             disabled={agent.name === '' || agent.type === '' || agent.edited === ''}
-            className='bg-blue-500 my-2 p-1.5 w-1/2 mx-auto rounded hover:bg-blue-700 text-white'
+            className='bg-blue-500 my-2 p-1.5 w-1/2 mx-auto rounded hover:bg-blue-700 text-white disabled:opacity-60'
           />
         </div>
       </>

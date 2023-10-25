@@ -1,6 +1,6 @@
 import {ButtonType} from "@/types";
 
-const Button = ({text,onClick,disabled,className}:ButtonType) => {
+const Button = ({text, onClick, disabled, className}:ButtonType) => {
   return (
     <button
       type="button"

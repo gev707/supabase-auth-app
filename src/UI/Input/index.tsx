@@ -1,6 +1,4 @@
 import {InputProps} from "@/types";
-import {className} from "postcss-selector-parser";
-
 
 export default function Input({
                                 onChange,

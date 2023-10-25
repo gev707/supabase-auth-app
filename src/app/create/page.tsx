@@ -7,7 +7,7 @@ import Form from "@/components/Form";
 
 export default function Create() {
 
-  const {isModalOpen,isConfirmModalOpen} = useSelectorTyped(state=> state.modal);
+  const {isModalOpen,} = useSelectorTyped(state=> state.modal);
 
   return (
     <div className='flex justify-center items-center w-full h-full'>
@@ -19,7 +19,6 @@ export default function Create() {
               <Table />
             </div>
       }
-
     </div>
   )
 }

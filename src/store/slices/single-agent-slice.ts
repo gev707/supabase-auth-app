@@ -8,7 +8,8 @@ interface AgentState {
 const initialState:AgentState = {
   singleAgent: {},
 }
-const singleAgent = createSlice({
+
+const singleAgentSlice = createSlice({
   name:'single',
   initialState,
   reducers:{},
@@ -23,10 +24,7 @@ const singleAgent = createSlice({
       .addCase(getSingleAgent.rejected, (state) => {
         state.singleAgent = {}
       })
-
   }
 })
 
-
-export const  {} = singleAgent.actions
-export default singleAgent.reducer
+export default singleAgentSlice.reducer

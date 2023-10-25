@@ -7,7 +7,6 @@ interface AgentsState {
   filteredAgents:IAgents[],
   isLoading :boolean,
   error:string
-
 }
 
 const initialState:AgentsState = {
@@ -17,7 +16,7 @@ const initialState:AgentsState = {
   error:'',
 }
 
-export const agents = createSlice({
+const agents = createSlice({
   name: 'agents',
   initialState,
   reducers:{
@@ -29,7 +28,7 @@ export const agents = createSlice({
       state.filteredAgents = state.agents.filter(item=> item.name.includes(action.payload))
     }
   },
-  extraReducers(builder) {
+  extraReducers: function (builder) {
     // @ts-ignore
     builder
       .addCase(fetchAgents.pending, (state) => {
@@ -38,13 +37,13 @@ export const agents = createSlice({
         state.agents = []
         state.filteredAgents = []
       })
-      .addCase(fetchAgents.fulfilled, (state, action:PayloadAction<IAgents[]>) => {
+      .addCase(fetchAgents.fulfilled, (state, action: PayloadAction<IAgents[]>) => {
         state.isLoading = false
         state.agents = action.payload
         state.filteredAgents = action.payload
         state.error = ''
       })
-      .addCase(fetchAgents.rejected, (state,action:PayloadAction<string> ) => {
+      .addCase(fetchAgents.rejected, (state, action: PayloadAction<string>) => {
         state.isLoading = false
         state.agents = []
         state.filteredAgents = []
@@ -53,5 +52,9 @@ export const agents = createSlice({
   }
 })
 
-export const {deleteAgent,filterAgents} = agents.actions;
+export const {
+  deleteAgent,
+  filterAgents
+} = agents.actions;
+
 export default  agents.reducer

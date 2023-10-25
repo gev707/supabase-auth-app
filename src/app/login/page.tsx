@@ -1,58 +1,41 @@
 'use client'
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-
-import type { Database } from '@/app/auth/lib/database.types'
 import Input from "@/UI/Input";
 import Button from "@/UI/Button";
+import {useAuth} from "@/hooks/useAuth";
 
 export default function Login() {
-  const [isLogin,setIsLogin] = useState<boolean>(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const router = useRouter()
-  const supabase = createClientComponentClient<Database>()
 
-  const handleSignUp = async () => {
-    await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
-      },
-    })
-    router.push('./create')
-  }
-
-  const handleSignIn = async () => {
-    await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-    router.push('./create')
-  }
-
-  const handleChangeSignUp = () => {
-    setIsLogin(prevState => !prevState)
-  }
+  const {
+    isLogin,
+    email,
+    password,
+    handleChangeSignUp,
+    handleSignUp,
+    handleSignIn,
+    handleEmailValueChange,
+    handlePasswordValueChange
+  } = useAuth()
 
   return (
     <>
-        <form className='w-72 mx-auto my-32 shadow-xl p-3 grid text-center rounded'>
+        <form
+          className='w-72 mx-auto my-32 shadow-xl p-3 grid text-center rounded'
+          onSubmit={(e)=>e.preventDefault()}
+        >
         <label className='text-3xl text-grey-900 py-1'>{isLogin ?  'Sign Up': 'Login'}</label>
           <Input
             type='text'
             value={email}
-            onChange={(e)=>setEmail(e.target.value)}
+            name='email'
+            onChange={(e)=>handleEmailValueChange(e)}
             autoComplate='off'
             className='my-2 rounded p-1.5 text-sm bg-gray-100'
           />
           <Input
             type="password"
             name="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e)=>handlePasswordValueChange(e)}
             value={password}
             autoComplate='off'
             className=' rounded p-1.5 text-sm bg-gray-100 mb-5'

@@ -2,12 +2,20 @@
 
 import Link from "next/link";
 import {useRouter} from "next/navigation";
+import {useAuth} from "@/hooks/useAuth";
+import {useEffect} from "react";
 
 export default function Header() {
+  const {handleSignOut,getUser,user} = useAuth()
   const router = useRouter()
   const routeHomePage = () => {
     router.push('./')
   }
+
+  useEffect(()=>{
+    getUser()
+  },[])
+
   return (
     <header className='flex justify-between items-center pl-5 pr-5 border-b-2 bg-emerald-500 h-18'>
       <h1
@@ -38,8 +46,12 @@ export default function Header() {
           </li>
           </ul>
         </div>
-      <div className="">
-        <h2>ggg</h2>
+      <div className='flex gap-1'>
+        <button
+          className='text-white text-sm font-bold shadow p-1 rounded'
+          onClick={handleSignOut}
+        >Sign Out</button>
+        <h2>{user?.email}</h2>
       </div>
     </header>
   )

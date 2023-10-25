@@ -17,16 +17,14 @@ const modal = createSlice({
       setToggleModal : (state) => {
         state.isModalOpen= !state.isModalOpen
       },
-    setToggleConfirmModal: (state)=>{
-        state.isConfirmModalOpen = !state.isConfirmModalOpen
-    }
+      setToggleConfirmModal: (state)=>{
+          state.isConfirmModalOpen = !state.isConfirmModalOpen
+      }
   },
 })
 
-
 export const  {
   setToggleModal,
-  setToggleConfirmModal
 } = modal.actions
 
 export default modal.reducer

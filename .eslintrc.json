@@ -1,3 +1,20 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals"
+  ],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "no-console": "warn",
+    "no-unused-vars": "error",
+    "no-empty": "warn",
+    "no-duplicate-imports": "warn",
+    "semi-spacing": "warn",
+    "block-spacing": "warn",
+    "no-unused-expressions": "warn",
+    "space-before-function-paren": ["warn", "never"],
+    "@typescript-eslint/no-explicit-any": "error"
+  }
 }

@@ -8,11 +8,9 @@ export type ButtonType = {
   disabled?:boolean
 }
 
-
-
 export interface InputProps {
   type: 'text' | 'search' | 'password'
-  id?:string
+  id?: string
   label?: string
   value: string | number
   name?: string
@@ -20,11 +18,9 @@ export interface InputProps {
   className?: string
   disabled?: boolean
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onKeyPress?:(e:KeyboardEvent<HTMLInputElement>) => void
-  autoComplate? : string
+  onKeyPress?: (e: KeyboardEvent<HTMLInputElement>) => void
+  autoComplate?: string
 }
-
-
 export interface IAgents   {
   name:string,
   id?:string,
@@ -32,3 +28,6 @@ export interface IAgents   {
   edited:string
 }
 
+export interface IUser {
+  email:string
+}

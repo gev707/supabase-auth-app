@@ -1,18 +1,17 @@
 import { configureStore,combineReducers } from '@reduxjs/toolkit'
 import agents from "@/store/slices/agent-slice";
 import modal from '@/store/slices/modal-slice'
-import single from '@/store/slices/single-agent'
+import single from '@/store/slices/single-agent-slice'
 import {useDispatch} from "react-redux";
 
-
-const rootReduser = combineReducers({
+const rootReducer = combineReducers({
   agents,
   modal,
-  single
+  single,
 })
 
 export const store = configureStore({
-  reducer: rootReduser
+  reducer: rootReducer
 })
 
 export type RootState = ReturnType<typeof store.getState>

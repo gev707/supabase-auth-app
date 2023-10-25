@@ -7,11 +7,10 @@ import {Line} from "@/components/Table/Line";
 import {deleteAgentById, fetchAgents} from "@/store/thunks/list-thunk";
 import {deleteAgent} from "@/store/slices/agent-slice";
 
-
 export default function Table() {
   const {filteredAgents:agents, isLoading} = useSelectorTyped(state=> state.agents)
   const dispatch = useAppDispatch()
-  // @ts-ignore
+
   const handleDelete = (id) => {
     dispatch(deleteAgentById(id))
     dispatch(deleteAgent(id))
@@ -20,7 +19,6 @@ export default function Table() {
   useEffect(()=>{
      dispatch(fetchAgents())
   },[])
-
 
   const newData=
     agents?.map(item=> {

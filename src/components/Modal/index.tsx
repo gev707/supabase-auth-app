@@ -28,7 +28,6 @@ export default function Modal() {
   }
 
   const handleSubmit = () => {
-
     if(agent.name !== '' && agent.type !== '' && agent.edited !== '') {
       dispatch(addAgent({...agent}));
       dispatch(setToggleModal())
@@ -66,14 +65,13 @@ export default function Modal() {
         onChange={(e)=>handleChange(e)}
         placeholder='edited'
         className='p-1.5 my-2 rounded bg-gray-100 shadow'
-
       />
       <Button
         text="Add"
         onClick={handleSubmit}
         type='submit'
         disabled={agent.name === '' || agent.type === '' || agent.edited === ''}
-        className='bg-blue-500 my-2 p-1.5 w-1/2 mx-auto rounded hover:bg-blue-700 text-white'
+        className='bg-blue-500 my-2 p-1.5 w-1/2 mx-auto rounded hover:bg-blue-700 text-white disabled:opacity-60'
       />
     </form>
 
