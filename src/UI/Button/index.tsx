@@ -1,12 +1,12 @@
-import {ButtonType} from "../../types";
-import {className} from "postcss-selector-parser";
+import {ButtonType} from "@/types";
 
-const Button = ({text,onClick,className}:ButtonType) => {
+const Button = ({text, onClick, disabled, className}:ButtonType) => {
   return (
     <button
       type="button"
       onClick={onClick}
       className={className}
+      disabled={disabled}
     >
       {text}
     </button>

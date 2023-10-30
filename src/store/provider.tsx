@@ -1,6 +1,5 @@
 'use client'
 import {store} from './index';
-import React, {FC} from "react";
 import {Provider} from 'react-redux'
 
 interface ChildrenProps  {

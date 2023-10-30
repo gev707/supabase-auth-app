@@ -26,16 +26,3 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-header {
-  height: 50px;
-}
-
-form {
-
-}
-
-li {
-  font-size: 13px;
-  font-weight: bold;
-}
-

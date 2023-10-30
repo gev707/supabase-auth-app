@@ -1,13 +1,13 @@
 import {InputProps} from "@/types";
 
-
 export default function Input({
                                 onChange,
                                 value,
                                 type,
-                                className,
                                 placeholder,
-                                id}:InputProps) {
+                                name,
+                                id,
+                                className}:InputProps) {
   return <input
     type={type}
     onChange={onChange}
@@ -15,5 +15,6 @@ export default function Input({
     className={className}
     placeholder={placeholder}
     id={id}
+    name={name}
   />
 }

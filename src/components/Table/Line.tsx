@@ -1,49 +1,38 @@
-import {MdDeleteOutline,MdFileCopy} from 'react-icons/md'
-import {useDispatch, useSelector} from 'react-redux'
-import {deleteCurrentListItem} from "@/store/slices/list-slice";
+'use client'
 
-type Line = {
-  id:number
-  name:string,
-  type:string,
-  edited:string
+import Link from "next/link";
+import {MdDeleteForever, MdEdit} from 'react-icons/md'
+import {IAgents} from "@/types";
+
+interface LineProps extends IAgents {
+ handleDelete?:()=>void
 }
 
-export const Line = ({name, type, edited,id}:Line) => {
-  const dispatch = useDispatch();
-  const handleDelete = (id:number) => {
-    dispatch(deleteCurrentListItem(id))
-  }
+export const Line = ({name, type, edited, id, handleDelete}: LineProps) => {
 
   return (
-    <div className='w-full mt-5 pl-5 pr-5 h-14 items-center grid border-b-2'>
-      <div className="flex justify-between items-center">
-        <div className="w-full flex  items-center">
-          <span className='table-span'>{name}</span>
-        </div>
-        <div className='flex justify-end items-center w-full'>
-          <div className='flex justify-between w-full'>
-            <div>
-              <span className='table-span'>{type}</span>
-            </div>
-            <div>
-              <span className="table-span">{edited}</span>
-            </div>
-          </div>
-          <div className='w-full'>
-            <div className="flex justify-end items-center w-full">
+
+      <div className=' mt-5 pl-5 pr-5 h-14 border-b-2'>
+            <div className="flex justify-between">
+              <div>
+                <span className='table-span'>{name}</span>
+              </div>
+              <div>
+                <span className='table-span'>{type}</span>
+              </div>
+              <div>
+                <span className="table-span">{edited}</span>
+              </div>
               <div className='flex'>
-                <span className="table-span cursor-pointer mr-1">{MdFileCopy()}</span>
+                <span
+                  className="cursor-pointer mr-1"
+                ><Link href={`./create/${id}`}>{MdEdit()}</Link></span>
                 <span aria-hidden='true'
-                      onClick={() => handleDelete(id)}
-                      className="table-span cursor-pointer">{MdDeleteOutline()}</span>
+                      onClick={handleDelete}
+                      className="cursor-pointer text-red-700"
+                >{MdDeleteForever()}</span>
               </div>
             </div>
-          </div>
-        </div>
       </div>
-    </div>
-
-  )
-
+    )
 }
